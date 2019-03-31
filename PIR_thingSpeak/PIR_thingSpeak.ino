@@ -59,10 +59,6 @@ void setup()
   Serial.println("WiFi connected");  
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP()); 
-  // The PIR sensor's output signal is an open-collector, 
-  // so a pull-up resistor is required:
-  //pinMode(MOTION_PIN, INPUT_PULLUP);
-  //pinMode(LED_PIN, OUTPUT);
   Serial.println("Motion Sensor Alarm");
   Serial.println(val); 
   
@@ -85,22 +81,20 @@ currentMillis = millis();
     Serial.println("Motion detected!");
     val = 1;
     Serial.print("val value = ");
-    Serial.println(val); 
-    //motionState = 1;                                                    // We only want to update on the change, not state
-    ThingSpeak.writeField(myChannelNumber, 1, val, myWriteAPIKey);      // Update ThingSpeak channel the PIR sensor value '0'  
+    Serial.println(val);                                                // set val to equal 1, which will be written to thingspeak channel
+    ThingSpeak.writeField(myChannelNumber, 1, val, myWriteAPIKey);      // Update ThingSpeak channel the PIR sensor value '1'  
     Serial.println("Val Data Sent to ThingSpeak!");    
-    delay(21000);
+    delay(21000);                                                       // 21 sec delay as thingspeak will only take data every 20 secs
   }
   else
   {
     digitalWrite(LED_PIN, LOW);
     Serial.println("Motion not detected!");
-    val = 0;
-    Serial.print("val value = ");
-    Serial.println(val); 
-    //motionState = 1;                                                    // We only want to update on the change, not state
-    ThingSpeak.writeField(myChannelNumber, 1, val, myWriteAPIKey);      // Update ThingSpeak channel the PIR sensor value '0'  
-    Serial.println("Val Data Sent to ThingSpeak!");
-    delay(21000);
+    val = 0;                                                            // set val to equal 0, which will be written to thingspeak channel
+    Serial.print("val value = ");                                       // prints value of val
+    Serial.println(val);                                                // prints value of val
+    ThingSpeak.writeField(myChannelNumber, 1, val, myWriteAPIKey);      // Update ThingSpeak channel with the value of val'  
+    Serial.println("Val Data Sent to ThingSpeak!");                     // Update ThingSpeak channel the PIR sensor value '0'  
+    delay(21000);                                                       // 21 sec delay as thingspeak will only take data every 20 secs
   }
 }
