@@ -1,9 +1,6 @@
 /******************************************************************************
-PIR_Motion_Detector_Example.ino
-Example sketch for SparkFun's PIR Motion Detector
-  (https://www.sparkfun.com/products/13285)
-Jim Lindblom @ SparkFun Electronics
-May 2, 2016
+PIR_Motion_Detector.ino
+
 
 The PIR motion sensor has a three-pin JST connector terminating it. Connect
 the wire colors like this:
@@ -11,12 +8,10 @@ the wire colors like this:
 - White: GND
 - Red: 5V
 
-Connect an LED to pin 13 (if your Arduino doesn't already have an LED there).
 
 Whenever the PIR sensor detects movement, it'll write the alarm pin LOW.
+Then it will define the Val value and push this to thingspeak.
 
-Development environment specifics:
-Arduino 1.6.7
 ******************************************************************************/
 
 #include "ThingSpeak.h"                                 // Include ThingSpeak Library
